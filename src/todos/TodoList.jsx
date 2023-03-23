@@ -9,7 +9,10 @@ import './TodoList.css'
 const TodoList = ({todos=[], onRemovePressed, onCompletePressed})=>(
     <div className="list-wrapper">
         <NewTodoForm/>
-        {todos.map(todo => <TodoListItems todo={todo} onRemovePressed={onRemovePressed} onCompletePressed={onCompletePressed}/>)}
+        {todos.map(todo => <TodoListItems 
+        todo={todo} 
+        onRemovePressed={onRemovePressed} 
+        onCompletePressed={onCompletePressed}/>)}
     </div>
 )
 
@@ -19,7 +22,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     onRemovePressed: text => dispatch(removeTodo(text)),
-    onCompletePressed: text => dispatch(completeTodo(text))
+    onCompletePressed: text => dispatch(completeTodo(text)),
+    
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
