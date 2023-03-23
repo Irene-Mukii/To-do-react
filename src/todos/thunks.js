@@ -1,4 +1,4 @@
-import { createTodo ,removeTodo, loadTodosFailure, loadTodosInProgress, loadTodosSuccess } from "./actions";
+import { createTodo ,removeTodo, completeTodo, loadTodosFailure, loadTodosInProgress, loadTodosSuccess } from "./actions";
 // does redux thunk automatically connect our side effects to the component? no, call in component
 
 export const loadTodos = () => async dispatch  =>{
@@ -41,6 +41,18 @@ export const removeTodoRequest = id => async dispatch => {
         dispatch(removeTodo(removedTodo))
     } catch (e){
         dispatch(displayAlert(e))
+    }
+}
+
+export const completeTodoRequest = id => async dispatch => {
+    try {
+        const response = await fetch(`http://localhost:5000/todos/${id}/completed`, {
+            method: 'post'
+        })
+        const completedTodo = await response.json();
+        dispatch(completeTodo(completedTodo))
+    }catch (e) {
+        dispatch(displayAlert(e));
     }
 }
 
