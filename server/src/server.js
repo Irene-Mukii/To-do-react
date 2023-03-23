@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import uuid from 'uuid';
+import { v4 as uuidv4} from 'uuid';
 
 var fakeTodos = [{
     id: 'ae06181d-92c2-4fed-a29d-fb53a6301eb9',
@@ -41,7 +42,7 @@ app.post('/todos', (req, res) => {
     const { text } = req.body;
     if (text) {
         const insertedTodo = {
-            id: uuid(),
+            id: uuidv4(),
             createdAt: Date.now(),
             isCompleted: false,
             text,
