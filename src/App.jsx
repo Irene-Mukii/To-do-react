@@ -1,11 +1,16 @@
 import React from "react";
-import './App.css';
 import TodoList from "./todos/TodoList.jsx";
+import styled from "styled-components";
+
+const AppContainer = styled.div`
+margin: 1rem;
+color: #222222;
+font-family: 'Courier New', Courier, monospace;`
 
 const App = ()=> (
-    <div className="App">
+    <AppContainer>
         <TodoList />
-    </div>
+    </AppContainer>
 )
 
 export default App
