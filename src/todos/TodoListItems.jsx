@@ -14,31 +14,37 @@ position: absolute;
 right: 12px;
 bottom: 12px;`
 
-const CompletedButton = styled.button`
+const Button = styled.button`
 font-size: 16px;
 padding: 8px;
 border: none;
 border-radius: 8px;
 outline: none;
-cursor: pointer;
+cursor: pointer;`
+
+const CompletedButton = styled(Button)`
 display: inline-block;
 background-color: #22ee22;`
 
-const RemovedButton = styled.button`
-font-size: 16px;
-padding: 8px;
-border: none;
-border-radius: 8px;
-outline: none;
-cursor: pointer;
+const RemovedButton = styled(Button)`
 display: inline-block;
 background-color: #ee2222;
 margin-left: 8px;`
 
+const TodoItemContainerWithWarning = styled(TodoItemContainer)`
+border-bottom: ${props => (new Date(props.createdAt) > new Date(Date.now() - (8640000 * 3)) ?  'none' : '2px solid red')};`
 
-const TodoListItems = ({todo, onRemovePressed, onCompletePressed})=> (
-    <TodoItemContainer>
+
+
+const TodoListItems = ({todo, onRemovePressed, onCompletePressed})=> {
+    const Container = todo.isCompleted ? TodoItemContainer : TodoItemContainerWithWarning; 
+
+    return (
+    <Container createdAt={todo.createdAt}>
         <h3> {todo.text}</h3>
+        <p>Created at:&nbsp;
+            {(new Date(todo.createdAt)).toLocaleDateString()}
+        </p>
         <ButtonsContainer>
         {console.log(todo)}
         {todo.isCompleted 
@@ -49,7 +55,7 @@ const TodoListItems = ({todo, onRemovePressed, onCompletePressed})=> (
             onClick={()=>onRemovePressed(todo.id)}
             >Remove</RemovedButton>
         </ButtonsContainer>
-    </TodoItemContainer>
-)
+    </Container>
+)}
 
 export default TodoListItems;
