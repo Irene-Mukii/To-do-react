@@ -32,7 +32,7 @@ background-color: #ee2222;
 margin-left: 8px;`
 
 const TodoItemContainerWithWarning = styled(TodoItemContainer)`
-border-bottom: ${props => (new Date(props.createdAt) > new Date(Date.now() - (8640000 * 3)) ?  'none' : '2px solid red')};`
+border-bottom: ${props => (new Date(props.createdAt) > new Date(Date.now() - (8640000 * 5)) ?  'none' : '2px solid red')};`
 
 
 
